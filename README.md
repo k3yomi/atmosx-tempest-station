@@ -22,7 +22,7 @@ npm install atmosx-tempest-station
 const { TempestStation } = require(`atmosx-tempest-station`); // CJS
 import { TempestStation } from `atmosx-tempest-station`; // ESM
 
-const temepst = new TempestStation({
+const tempest = new TempestStation({
     api: "api_key_here",
     deviceId: 0,
     stationId: 0,
@@ -36,7 +36,7 @@ const temepst = new TempestStation({
 ### Event `onForecast`
 Emitted when forecast data is received. The event provides an object containing weather forecast features.
 ```js
-temepst.on(`onForecast`, (data) => {
+tempest.on(`onForecast`, (data) => {
     console.log(data);
 });
 ```
@@ -44,7 +44,7 @@ temepst.on(`onForecast`, (data) => {
 ### Event `onObservation`
 Emitted when observation data is received. The event provides an object containing current weather observation features.
 ```js
-temepst.on(`onObservation`, (data) => {
+tempest.on(`onObservation`, (data) => {
     console.log(data);
 });
 ```
@@ -52,7 +52,7 @@ temepst.on(`onObservation`, (data) => {
 ### Event `onRapidWind`
 Emitted when rapid wind data is received. The event provides an object containing rapid wind features.
 ```js
-temepst.on(`onRapidWind`, (data) => {
+tempest.on(`onRapidWind`, (data) => {
     console.log(data);
 });
 ```
@@ -60,7 +60,7 @@ temepst.on(`onRapidWind`, (data) => {
 ### Event `onLightning`
 Emitted when lightning event data is received. The event provides an object containing lightning features.
 ```js
-temepst.on(`onLightning`, (data) => {
+tempest.on(`onLightning`, (data) => {
     console.log(data);
 });
 ```
@@ -71,27 +71,27 @@ temepst.on(`onLightning`, (data) => {
 ### Function `getForecast()`
 Fetches the weather forecast data from the Tempest Weather Station API.
 ```js
-const forecastData = await temepst.getForecast();
+const forecastData = await tempest.getForecast();
 console.log(forecastData);
 ```
 
 ### Function `getClosestStation({ latitude, longitude })`
 Fetches the closest Tempest Weather Station based on provided latitude and longitude.
 ```js
-const closestStation = await temepst.getClosestStation({ latitude: 37.7749, longitude: -122.4194 });
+const closestStation = await tempest.getClosestStation({ latitude: 37.7749, longitude: -122.4194 });
 console.log(closestStation);
 ```
 
 ### Function `setSettings({})`
 Updates the TempestStation instance settings with new API key, device ID, and station ID.
 ```js
-temepst.setSettings({ api: "new_api_key", deviceId: 12345, stationId: 67890 });
+tempest.setSettings({ api: "new_api_key", deviceId: 12345, stationId: 67890 });
 ```
 
 ### Function `stop()`
 Stops the WebSocket connection to the Tempest Weather Station API.
 ```js
-temepst.stop();
+tempest.stop();
 ```
 
 ## References
