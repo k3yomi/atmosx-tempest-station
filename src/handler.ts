@@ -13,7 +13,7 @@
 
 
 import * as loader from './bootstrap';
-import * as types from './types';
+import Utils from './utils';
 
 export class Handler { 
        
@@ -61,6 +61,7 @@ export class Handler {
      * @param {*} data
      */
     public static forecastHandler(data: any) {
+        if (data.error || data.message.status.status_code == 3) { return Utils.warn(loader.definitions.messages.forecast_fetch_error, true) }
         loader.cache.events.emit(`onForecast`, {
             features: [{
                 geometry: { type: "Point", coordinates: [data.message.latitude, data.message.longitude] },

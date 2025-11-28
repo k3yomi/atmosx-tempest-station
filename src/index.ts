@@ -116,7 +116,7 @@ export class TempestStation {
             if (type == `evt_strike`) Handler.lightningHandler(data)
         })
         this.websocket.on('error', err => {
-            Utils.warn(`WebSocket error: ${err}`)
+            Utils.warn(loader.definitions.messages.api_failed, true)
         })
     }
 

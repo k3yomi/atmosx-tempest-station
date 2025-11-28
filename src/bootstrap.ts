@@ -44,7 +44,9 @@ export const settings = {
 
 export const definitions = {
     messages: {
-        client_stopped: `Client has been stopped.`,
-        websocket_established: `WebSocket connection established.`,
+        client_stopped: `Disconnected from Tempest Weather Station.`,
+        websocket_established: `Successfully connected to Tempest Weather Station.`,
+        forecast_fetch_error: `Please make sure you have a valid station ID`,
+        api_failed: `Request failed. Please check your API key and device ID.`,
     },
 };

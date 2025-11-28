@@ -67,8 +67,10 @@ var settings = {
 };
 var definitions = {
   messages: {
-    client_stopped: `Client has been stopped.`,
-    websocket_established: `WebSocket connection established.`
+    client_stopped: `Disconnected from Tempest Weather Station.`,
+    websocket_established: `Successfully connected to Tempest Weather Station.`,
+    forecast_fetch_error: `Please make sure you have a valid station ID`,
+    api_failed: `Request failed. Please check your API key and device ID.`
   }
 };
 
@@ -220,6 +222,9 @@ var Handler = class {
    * @param {*} data
    */
   static forecastHandler(data) {
+    if (data.error || data.message.status.status_code == 3) {
+      return utils_default.warn(definitions.messages.forecast_fetch_error, true);
+    }
     cache.events.emit(`onForecast`, {
       features: [{
         geometry: { type: "Point", coordinates: [data.message.latitude, data.message.longitude] },
@@ -397,7 +402,7 @@ var TempestStation = class {
         if (type == `evt_strike`) handler_default.lightningHandler(data);
       }));
       this.websocket.on("error", (err) => {
-        utils_default.warn(`WebSocket error: ${err}`);
+        utils_default.warn(definitions.messages.api_failed, true);
       });
     });
   }
