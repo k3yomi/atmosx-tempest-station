@@ -104,6 +104,24 @@ var definitions = {
     websocket_established: `Successfully connected to Tempest Weather Station.`,
     forecast_fetch_error: `Please make sure you have a valid station ID`,
     api_failed: `Request failed. Please check your API key and device ID.`
+  },
+  cardinal_direction_degrees: {
+    N: [348.75, 360],
+    NNE: [11.25, 33.75],
+    NE: [33.75, 56.25],
+    ENE: [56.25, 78.75],
+    E: [78.75, 101.25],
+    ESE: [101.25, 123.75],
+    SE: [123.75, 146.25],
+    SSE: [146.25, 168.75],
+    S: [168.75, 191.25],
+    SSW: [191.25, 213.75],
+    SW: [213.75, 236.25],
+    WSW: [236.25, 258.75],
+    W: [258.75, 281.25],
+    WNW: [281.25, 303.75],
+    NW: [303.75, 326.25],
+    NNW: [326.25, 348.75]
   }
 };
 
@@ -237,7 +255,10 @@ var Handler = class {
             time: data.obs[0][0],
             wind_average: parseFloat((data.obs[0][2] * 2.23694).toFixed(2)),
             wind_gust: parseFloat((data.obs[0][3] * 2.23694).toFixed(2)),
-            wind_direction: data.obs[0][4],
+            wind_direction: definitions.cardinal_direction_degrees ? Object.keys(definitions.cardinal_direction_degrees).find((dir) => {
+              const [min, max] = definitions.cardinal_direction_degrees[dir];
+              return data.obs[0][4] >= min && data.obs[0][4] < max;
+            }) : data.obs[0][4],
             temperature: parseFloat((data.obs[0][7] * 9 / 5 + 32).toFixed(2)),
             humidity: data.obs[0][8]
           }
@@ -272,7 +293,10 @@ var Handler = class {
           pressure_trend: data.message.current_conditions.pressure_trend,
           wind_average: data.message.current_conditions.wind_avg,
           wind_gust: data.message.current_conditions.wind_gust,
-          wind_direction: data.message.current_conditions.wind_direction,
+          wind_direction: definitions.cardinal_direction_degrees ? Object.keys(definitions.cardinal_direction_degrees).find((dir) => {
+            const [min, max] = definitions.cardinal_direction_degrees[dir];
+            return data.message.current_conditions.wind_direction >= min && data.message.current_conditions.wind_direction < max;
+          }) : data.message.current_conditions.wind_direction,
           station_name: data.message.location_name,
           elevation: data.message.elevation
         }
@@ -296,7 +320,10 @@ var Handler = class {
         properties: {
           time: data.ob[0],
           speed: data.ob[1],
-          direction: data.ob[2]
+          direction: definitions.cardinal_direction_degrees ? Object.keys(definitions.cardinal_direction_degrees).find((dir) => {
+            const [min, max] = definitions.cardinal_direction_degrees[dir];
+            return data.ob[2] >= min && data.ob[2] < max;
+          }) : data.ob[2]
         }
       }]
     });
