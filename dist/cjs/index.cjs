@@ -410,7 +410,7 @@ var TempestStation = class {
       const wsUrl = `wss://ws.weatherflow.com/swd/data?api_key=${settings2.api}&location_id=${settings2.deviceId}&ver=tempest-20250728`;
       this.websocket = new packages.ws(wsUrl);
       this.websocket.on("open", () => __async(this, null, function* () {
-        utils_default.warn(definitions.messages.websocket_established, true);
+        utils_default.warn(`${definitions.messages.websocket_established} @ ${settings2.deviceId}/${settings2.stationId}`, true);
         cache.events.emit(`onConnection`);
         if (settings2.stationId) {
           const stationsUrl = `https://swd.weatherflow.com/swd/rest/stations/${settings2.stationId}?api_key=${settings2.api}`;
@@ -547,7 +547,7 @@ var TempestStation = class {
         this.websocket.close();
         this.websocket = null;
       }
-      utils_default.warn(definitions.messages.client_stopped, true);
+      utils_default.warn(`${definitions.messages.client_stopped} @ ${settings.deviceId}/${settings.stationId}`, true);
     });
   }
 };

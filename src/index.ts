@@ -74,7 +74,7 @@ export class TempestStation {
             `&location_id=${settings.deviceId}&ver=tempest-20250728`
         this.websocket = new loader.packages.ws(wsUrl)
         this.websocket.on('open', async () => {
-            Utils.warn(loader.definitions.messages.websocket_established, true)
+            Utils.warn(`${loader.definitions.messages.websocket_established} @ ${settings.deviceId}/${settings.stationId}`, true)
             loader.cache.events.emit(`onConnection`)
             if (settings.stationId) {
                 const stationsUrl =
@@ -208,7 +208,7 @@ export class TempestStation {
             this.websocket.close();
             this.websocket = null;
         }
-        Utils.warn(loader.definitions.messages.client_stopped, true)
+        Utils.warn(`${loader.definitions.messages.client_stopped} @ ${loader.settings.deviceId}/${loader.settings.stationId}`, true);
     }
 }
 

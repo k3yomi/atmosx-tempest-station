@@ -1,5 +1,5 @@
 
-<h1 style='font-size: 65px'; align="center">🌡️ AtmosphericX - Tempest Polling 💨</h1>
+<h1 style='font-size: 65px'; align="center">🌡️ AtmosphericX - Tempest Station 💨</h1>
 <div align="center">
   	<p align = "center">This repository provides a robust solution for interacting with the Tempest Weather Station. It enables seamless data retrieval using the device ID, including identifying the nearest station ID. With this project, you can access a wide range of weather related data such as temperature, humidity, pressure, wind gusts, and more.</small></p>
   	<p align = "center">Documentation written by @k3yomi</p>
